@@ -6,11 +6,16 @@ class Book
   end
 
   def ==(other)
-    @title == other.title && @author == other.author
+    other.class == self.class && @title == other.title && @author == other.author
   end
 
   def to_s
     @title
+  end
+
+  def each
+    yield @title
+    yield @author
   end
 
 end

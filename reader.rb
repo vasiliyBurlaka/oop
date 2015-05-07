@@ -10,10 +10,19 @@ class Reader
   end
 
   def ==(other)
-    @email == other.email && @name == other.name
+    other.class == self.class && @email == other.email && @name == other.name
   end
 
   def to_s
     "Name: #{@name}\nEmail: #{@email}\nCity: #{@city}\nStreet: #{@street}\nHouse: #{@house}"
   end
+
+  def each
+    yield @name
+    yield @email
+    yield @city
+    yield @street
+    yield @house
+  end
+
 end

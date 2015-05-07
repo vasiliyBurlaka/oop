@@ -46,21 +46,23 @@ orders = [
     Order.new(books[0], readers[2]),
     Order.new(books[1], readers[1]),
     Order.new(books[0], readers[0]),
-    Order.new(books[2], readers[2]),
+    Order.new(books[2], readers[5]),
     Order.new(books[3], readers[2]),
-    Order.new(books[3], readers[3]),
-    Order.new(books[3], readers[4])
+    Order.new(books[3], readers[3])
 ]
 
-lib = Library.new(authors, books, readers, orders)
+lib1 = Library.new(authors, books, readers, orders)
+
+lib = Library.new()
+lib.add_elem(orders[0..2])
+lib.add_elem(lib1)
+lib.add_elem(Order.new(books[3], readers[4]))
 
 lib.save_to_file('test.txt')
 lib = Library.load_from_file('test.txt')
 
-puts "__________"
-puts lib.who_often_takes_the_book(books[1])
-puts "__________"
-puts lib.what_is_the_most_popular_book
-puts "__________"
-puts lib.count_peoples_who_ordered_one_of_three_popular
-puts "__________"
+puts lib.who_often_takes_the_book(books[3])
+puts "______"
+puts lib.get_most_popular_book
+puts "______"
+puts lib.count_readers_of_most_popular
