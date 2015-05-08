@@ -10,12 +10,20 @@ module Library
   # Your code goes here...
   class Library
     COUNT_TOP_BOOKS = 3
+    attr_accessor :authors, :books, :readers, :orders
 
     def initialize(authors=[], books=[], readers=[], orders=[])
       @authors = authors
       @books = books
       @readers = readers
       @orders = orders
+    end
+
+    def each_classes
+      yield @authors, Author
+      yield @books, Book
+      yield @readers, Reader
+      yield @orders, Order
     end
 
     def each
@@ -41,18 +49,11 @@ module Library
     def add_elem(elem)
       if [Author, Book, Reader, Order, Library, Array, Hash].include? elem.class
         elem.each { |el| add_elem el }
-
-        case elem
-          when Author
-            @authors.push elem unless @authors.include? elem
-          when Book
-            @books.push elem unless @books.include? elem
-          when Order
-            @orders.push elem unless @orders.include? elem
-          when Reader
-            @readers.push elem unless @readers.include? elem
-        end
-
+        self.each_classes { |self_el, self_el_class|
+          if self_el_class === elem
+            self_el.push elem unless self_el.include? elem
+          end
+        }
       end
     end
 

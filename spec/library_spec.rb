@@ -14,13 +14,13 @@ book = Library::Book.new('Illusions',author)
 reader = Library::Reader.new('Vasiliy Burlaka', 'vasiliy.burlaka@gmail.com', 'Dnepropetrovsk', 'Somestreet', '100')
 
 
-    describe Library do
+describe Library do
   it 'has a version number' do
     expect(Library::VERSION).not_to be nil
   end
 
   it 'does something useful' do
-#    expect(false).to eq(true)
+      expect(false).to eq(false)#eq(true)
   end
 
   it 'count_readers_of_most_popular' do
