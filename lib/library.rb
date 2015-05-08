@@ -42,14 +42,15 @@ module Library
       if [Author, Book, Reader, Order, Library, Array, Hash].include? elem.class
         elem.each { |el| add_elem el }
 
-        if elem.class == Author
-          @authors.push elem unless @authors.include? elem
-        elsif elem.class == Book
-          @books.push elem unless @books.include? elem
-        elsif elem.class == Order
-          @orders.push elem unless @orders.include? elem
-        elsif elem.class == Reader
-          @readers.push elem unless @readers.include? elem
+        case elem
+          when Author
+            @authors.push elem unless @authors.include? elem
+          when Book
+            @books.push elem unless @books.include? elem
+          when Order
+            @orders.push elem unless @orders.include? elem
+          when Reader
+            @readers.push elem unless @readers.include? elem
         end
 
       end
